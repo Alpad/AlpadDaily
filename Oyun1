@@ -1,0 +1,374 @@
+<html><head>
+<script type="text/javascript">
+
+
+var newid;
+var time=500;
+var kareler=new Array(100);
+
+    function start()
+    {
+        id=4;
+        KareHareket(id);
+    }
+
+    function KareHareket(id)
+    {
+
+   
+      //en alt satırın dolma durumu,en alt satır temızlenır ustekıler bı alta duser
+    if(kareler[64]==1&&kareler[65]==1&&kareler[66]==1&&kareler[67]==1&&kareler[68]==1&&kareler[69]==1&&kareler[70]==1)
+     {
+                 for(i=64;i<=70;i++){
+                       kareler[i]=0;
+                       KareTemizle(i);
+                     }
+                     kontrol=1;
+                  
+                  
+                  
+                  //oyunun bıtme durumu hıc dolu kare kalmamıssa oyun kazanılır
+                   for(i=0;i<70;i++)
+                   {
+                     
+                       if(kareler[i]==1)
+                       {
+                        kontrol=0;
+                       
+                       }
+                       
+                  }
+                  if(kontrol==1){
+                             alert("Tebrikler");
+                              exit;
+                 }
+                 
+                 
+                 
+                 //usttekı karelerın bır alta dusurulmesı 1.sutun ıcın
+                 for(i=1;i<=70;i=i+7)
+                 {
+                    if(kareler[i]==1)
+                    {
+                        kareler[i]=0;
+                        kareler[64]=1;
+                        break; 
+                     } 
+                     
+                }
+                  //usttekı karelerın bır alta dusurulmesı 2.sutun ıcın
+                 for(i=2;i<=70;i=i+7)
+                 {
+                    if(kareler[i]==1)
+                    {
+                        kareler[i]=0;
+                        kareler[65]=1;
+                        break; 
+                     } 
+                     
+                }
+                 //usttekı karelerın bır alta dusurulmesı 3.sutun ıcın
+                 for(i=3;i<=70;i=i+7)
+                 {
+                    if(kareler[i]==1)
+                    {
+                        kareler[i]=0;
+                        kareler[66]=1;
+                        break; 
+                     } 
+                     
+                }
+                 //usttekı karelerın bır alta dusurulmesı 4.sutun ıcın
+                 for(i=4;i<=70;i=i+7)
+                 {
+                    if(kareler[i]==1)
+                    {
+                        kareler[i]=0;
+                        kareler[67]=1;
+                        break; 
+                     } 
+                     
+                }
+                 //usttekı karelerın bır alta dusurulmesı 5.sutun ıcın
+                 for(i=5;i<=70;i=i+7)
+                 {
+                    if(kareler[i]==1)
+                    {
+                        kareler[i]=0;
+                        kareler[68]=1;
+                        break; 
+                     } 
+                     
+                }
+                 //usttekı karelerın bır alta dusurulmesı 6.sutun ıcın
+                 for(i=6;i<=70;i=i+7)
+                 {
+                    if(kareler[i]==1)
+                    {
+                        kareler[i]=0;
+                        kareler[69]=1;
+                        break; 
+                     } 
+                     
+                }
+                 //usttekı karelerın bır alta dusurulmesı 7.sutun ıcın
+                 for(i=7;i<=70;i=i+7)
+                 {
+                    if(kareler[i]==1)
+                    {
+                        kareler[i]=0;
+                        kareler[70]=1;
+                        break; 
+                     } 
+                     
+                }
+                
+                
+                //yukardakı 7 sutun ıcın ayrı ayrı yapılan,karelerı bır alta dusurme ıslemı gorsellıge dokulur
+                for(i=1;i<=70;i++){
+                    if(kareler[i]==1)
+                    {
+                      KareBoya(i); 
+                    } else{
+                       KareTemizle(i);    
+                    }
+                    
+                    
+                    }
+                
+                         
+      }
+
+    
+    
+        KareBoya(id);
+        oldid=id-7;
+        newid=id+7;    
+
+
+
+        if(oldid>0&&oldid<70)
+        {  
+           
+           KareTemizle(oldid);
+           if(kareler[id]==1)
+              {
+               KareBoya(oldid);
+                 kareler[oldid]=1; 
+                 
+                 //sutunlardan herhangi biri dolmussa oyun biter
+                 if(kareler[1]==1||kareler[2]==1||kareler[3]==1||kareler[4]==1||kareler[5]==1||kareler[6]==1||kareler[7]==1){
+                      alert("Game Over");
+                      exit;
+                     }
+                     else 
+             
+                 newid=4;//new id ye tekrar 4 verilerek tekrarlı olarak yukardan bır kare ıner
+               }      
+        }  
+  
+        if(newid>70)
+        {
+           newid=4;
+        }
+
+     if(id==64||id==65||id==66||id==67||id==68||id==69||id==70){
+        
+          
+          kareler[id]=1;
+         
+         }
+
+        if(newid<=70)
+       { 
+           setTimeout("KareHareket(newid)", time);//tekrarlı olarak karenın yukardan ınmesı time da ınme hızı
+       }
+     
+     
+   }
+
+   function KareBoya(id)//idye gore kareyı sıyaha boya
+  {
+        document.getElementById(id).style.backgroundColor="#000000";
+        
+  }
+
+   function KareTemizle(id)//idye gore kareyı eskı halıne dondur
+   {
+        document.getElementById(id).style.backgroundColor="#FFFFFF";
+        
+   }
+
+
+
+    function tusDinleme() {
+   
+        x = event.keyCode;
+        kontrol=0;
+        
+        if(x==39)//sag yön tusuna basılmışsa
+        {
+            newid++;
+            oldid2=newid-8;
+            KareTemizle(oldid2);   
+        }
+        else
+        if(x==37)//solyön tusuna basılmışsa
+        {
+            newid--;
+            oldid2=newid-6;
+            KareTemizle(oldid2);   
+        }
+        else
+         if(x==65)//a tusuna yani oyuna göre hızlandırma tusuna basılmıssa
+         {
+             time=200;//oyunu hızlandır
+         }
+         else
+         if(x==68)//d tusuna yani oyuna göre yavaslatma tusuna basılmıssa
+         {
+             time=800;//oyunu yavaslat
+         }
+        
+    }
+
+
+</script>
+</head>
+<body onload="start()" onkeydown="tusDinleme();">
+<p>&nbsp;</p>
+<table width="200" height="283" border="5" align="center" cellpadding="0" cellspacing="0">
+  <tbody><tr>
+    <td id="1">&nbsp;</td>
+    <td id="2">&nbsp;</td>
+    <td id="3">&nbsp;</td>
+    <td id="4" style="background-color: rgb(255, 255, 255);">&nbsp;</td>
+    <td id="5">&nbsp;</td>
+    <td id="6">&nbsp;</td>
+    <td id="7">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="8">&nbsp;</td>
+    <td id="9">&nbsp;</td>
+    <td id="10">&nbsp;</td>
+    <td id="11" style="background-color: rgb(255, 255, 255);">&nbsp;</td>
+    <td id="12">&nbsp;</td>
+    <td id="13">&nbsp;</td>
+    <td id="14">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="15">&nbsp;</td>
+    <td id="16">&nbsp;</td>
+    <td id="17">&nbsp;</td>
+    <td id="18" style="background-color: rgb(255, 255, 255);">&nbsp;</td>
+    <td id="19">&nbsp;</td>
+    <td id="20">&nbsp;</td>
+    <td id="21">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="22">&nbsp;</td>
+    <td id="23">&nbsp;</td>
+    <td id="24">&nbsp;</td>
+    <td id="25" style="background-color: rgb(255, 255, 255);">&nbsp;</td>
+    <td id="26">&nbsp;</td>
+    <td id="27">&nbsp;</td>
+    <td id="28">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="29">&nbsp;</td>
+    <td id="30">&nbsp;</td>
+    <td id="31">&nbsp;</td>
+    <td id="32" style="background-color: rgb(255, 255, 255);">&nbsp;</td>
+    <td id="33">&nbsp;</td>
+    <td id="34">&nbsp;</td>
+    <td id="35">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="36">&nbsp;</td>
+    <td id="37">&nbsp;</td>
+    <td id="38">&nbsp;</td>
+    <td id="39" style="background-color: rgb(255, 255, 255);">&nbsp;</td>
+    <td id="40">&nbsp;</td>
+    <td id="41">&nbsp;</td>
+    <td id="42">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="43">&nbsp;</td>
+    <td id="44">&nbsp;</td>
+    <td id="45">&nbsp;</td>
+    <td id="46" style="background-color: rgb(255, 255, 255);">&nbsp;</td>
+    <td id="47">&nbsp;</td>
+    <td id="48">&nbsp;</td>
+    <td id="49">&nbsp;</td>
+  </tr>
+  <tr>
+   <td id="50">&nbsp;</td>
+    <td id="51">&nbsp;</td>
+    <td id="52">&nbsp;</td>
+    <td id="53" style="background-color: rgb(255, 255, 255);">&nbsp;</td>
+    <td id="54">&nbsp;</td>
+    <td id="55">&nbsp;</td>
+    <td id="56">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="57">&nbsp;</td>
+    <td id="58">&nbsp;</td>
+    <td id="59">&nbsp;</td>
+    <td id="60" style="background-color: rgb(0, 0, 0);">&nbsp;</td>
+    <td id="61">&nbsp;</td>
+    <td id="62">&nbsp;</td>
+    <td id="63">&nbsp;</td>
+  </tr>
+  <tr>
+     <td id="64">&nbsp;</td>
+    <td id="65">&nbsp;</td>
+    <td id="66">&nbsp;</td>
+    <td id="67" style="background-color: rgb(0, 0, 0);">&nbsp;</td>
+    <td id="68">&nbsp;</td>
+    <td id="69">&nbsp;</td>
+    <td id="70">&nbsp;</td>
+  </tr>
+</tbody></table>
+<p>&nbsp;       </p>
+<table width="500" border="0" align="center">
+  <tbody><tr>
+    <td width="117">&nbsp;</td>
+    <td colspan="2">Kontrol Tuşları</td>
+    <td width="34">&nbsp;</td>
+  </tr>
+ 
+    <td>Sağ Yön Tuşu</td>
+    <td width="500">Sağa Kaydır</td>
+    <td width="1">&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Sol Yön Tuşu</td>
+    <td>Sola Kaydır</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>A:</td>
+    <td>Hızlandır</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>D:</td>
+    <td>Yavaşlat</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+   <tr>
+   <br>
+   <br>
+   <br>
+    <td>Kodlayan Alpad</td>
+    <td></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</tbody></table>
+
+</body></html>
